@@ -22047,13 +22047,41 @@
 	var Main = function (_React$Component) {
 	  _inherits(Main, _React$Component);
 	
-	  function Main() {
+	  function Main(props) {
 	    _classCallCheck(this, Main);
 	
-	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+	
+	    _this.state = {
+	      latitude: 0,
+	      l: 0
+	    };
+	    _this._findMe = _this._findMe.bind(_this);
+	    _this._showPosition = _this._showPosition.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Main, [{
+	    key: "_findMe",
+	    value: function _findMe(event) {
+	      event.preventDefault();
+	      console.log("in findMe");
+	      var geo = navigator.geolocation;
+	      console.log(geo);
+	      if (geo) {
+	        geo.getCurrentPosition(this._showPosition);
+	      } else {
+	        alert("Geolocation is not supported by this browser.");
+	      }
+	    }
+	  }, {
+	    key: "_showPosition",
+	    value: function _showPosition(position) {
+	      console.log(position);
+	      this.setState({ longitude: position.coords.longitude });
+	      this.setState({ latitude: position.coords.latitude });
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -22071,6 +22099,25 @@
 	              null,
 	              " ",
 	              _react2.default.createElement(_reactClock2.default, null),
+	              " "
+	            ),
+	            _react2.default.createElement(
+	              "button",
+	              { className: "findMe", onClick: this._findMe },
+	              "Where am I? "
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              null,
+	              "Your longitude is : ",
+	              this.state.longitude,
+	              " "
+	            ),
+	            _react2.default.createElement(
+	              "h5",
+	              null,
+	              "Your latitude is : ",
+	              this.state.latitude,
 	              " "
 	            )
 	          )
