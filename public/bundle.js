@@ -22105,7 +22105,7 @@
 	      console.log(queryUrl);
 	
 	      _axios2.default.get(queryUrl).then(function (response) {
-	        console.log(response.data.results[0].address_components[2].long_name);
+	        console.log(response.data);
 	        var myCity = response.data.results[0].address_components[2].long_name;
 	        _this2.setState({ city: myCity });
 	      });

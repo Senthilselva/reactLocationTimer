@@ -47,7 +47,7 @@ _runQuery(){
   console.log(queryUrl);
 
   axios.get(queryUrl).then((response) => {
-    console.log(response.data.results[0].address_components[2].long_name);
+    console.log(response.data);
     var myCity = response.data.results[0].address_components[2].long_name;
     this.setState({city : myCity}); 
   });
